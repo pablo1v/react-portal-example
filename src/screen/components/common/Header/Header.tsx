@@ -31,7 +31,7 @@ const Header = () => {
     <header className={styles.container}>
       <div className={`main-content ${styles.content}`}>
         <div className={styles.brand}>
-          <img src="/favicon.ico" alt="Logo" />
+          <img src="/logo.png" alt="Logo" />
         </div>
 
         <nav className={styles.navigation}>

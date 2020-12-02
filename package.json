@@ -1,6 +1,6 @@
 {
-  "name": "react-fade-animation",
-  "version": "0.0.1",
+  "name": "react-portal-example",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "react-app-rewired start",
