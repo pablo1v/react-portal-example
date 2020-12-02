@@ -1,0 +1,32 @@
+{
+  "extends": "./tsconfig.paths.json",
+  "include": [
+    "src/**/*"
+  ],
+  "compilerOptions": {
+    "target": "ES5",
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "noEmit": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "typeRoots": [
+      "src/@types",
+      "node_modules/@types"
+    ]
+  }
+}

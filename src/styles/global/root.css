@@ -1,0 +1,30 @@
+:root {
+  --box-max-width: 1024px;
+  --box-content-spacing: 60px;
+
+  --main-transparency: 10%;
+
+  --main-border-radius: 3px;
+  --main-bigger-border-radius: 6px;
+
+  --main-box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.19);
+  --main-bottom-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --box-content-spacing: 40px;
+  }
+}
+
+@media (max-width: 612px) {
+  :root {
+    --box-content-spacing: 30px;
+  }
+}
+
+@media (max-width: 306px) {
+  :root {
+    --box-content-spacing: 20px;
+  }
+}

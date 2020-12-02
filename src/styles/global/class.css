@@ -1,0 +1,11 @@
+.main-content {
+  width: 100%;
+
+  max-width: calc(var(--box-max-width) + (var(--box-content-spacing) * 2));
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-left: var(--box-content-spacing);
+  padding-right: var(--box-content-spacing);
+}
