@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@emotion/react": "11.1.1",
-    "framer-motion": "2.9.5",
+    "framer-motion": "3.2.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "web-vitals": "1.1.0"
