@@ -45,7 +45,9 @@
   margin-top: 10px;
   padding: 8px 16px;
 
-  background-color: #f6f6f6f6;
+  color: #fff;
+  background-color: #2c2f33;
+
   box-shadow: var(--main-bottom-box-shadow);
   border-radius: var(--main-bigger-border-radius);
 }
@@ -67,5 +69,5 @@
 
 .user-dropdown-navigation a:hover,
 .user-dropdown-navigation button:hover {
-  background-color: rgba(0, 0, 0, var(--main-transparency));
+  background-color: rgba(255, 255, 255, var(--main-transparency));
 }

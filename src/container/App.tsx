@@ -1,67 +1,16 @@
-import { useRef } from 'react';
+import { UI } from './UI';
 
-import Layout from '@screen/layouts/Default';
-import Modal, {
-  Handles as ModalHandles,
-} from '@screen/components/forward/Modal';
+import { Provider as PortalProvider } from '@resources/contexts/Portal';
+import { GlobalStyle } from '@screen/styles/GlobalStyle';
 
-import { Provider as PortalProvider } from '@fixtures/contexts/Portal';
-
-// Global CSS
-import '@styles/global/index.css';
-
-const App = () => {
-  const modalRef = useRef<ModalHandles>(null);
-
-  return (
+export const App = (): JSX.Element => (
+  <>
     <PortalProvider>
       <div id="app">
-        <Layout>
-          <div
-            style={{
-              flexGrow: 1,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <div
-              style={{
-                textAlign: 'center',
-              }}
-            >
-              <h1>Title</h1>
-
-              <button
-                type="button"
-                onClick={() => modalRef.current?.open()}
-                style={{
-                  marginTop: '10px',
-                  padding: '12px 24px',
-                  borderRadius: '4px',
-                  backgroundColor: '#8ab0ed',
-                }}
-              >
-                Open Modal
-              </button>
-            </div>
-
-            <Modal ref={modalRef}>
-              <div
-                style={{
-                  backgroundColor: '#fff',
-                  padding: '15px',
-                  borderRadius: '6px',
-                }}
-              >
-                <h1>Modal</h1>
-              </div>
-            </Modal>
-          </div>
-        </Layout>
+        <UI />
       </div>
     </PortalProvider>
-  );
-};
 
-export default App;
+    <GlobalStyle />
+  </>
+);

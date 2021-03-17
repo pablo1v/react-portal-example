@@ -1,3 +1,4 @@
+import { useOutClick } from '@hitechline/reactools';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   useState,
@@ -8,93 +9,91 @@ import {
   Ref,
 } from 'react';
 
-import usePortal from '@fixtures/hooks/usePortal';
-import useOutClick from '@fixtures/hooks/useOutClick';
+import styles from './styles.module.css';
+import type { Handles } from './types';
 
-import styles from './Modal.module.css';
-import HiddenOverflowStyle from '@styles/dynamic/HiddenOverflowStyle';
+import { usePortal } from '@resources/hooks/usePortal';
+import { HiddenOverflowStyle } from '@screen/styles/HiddenOverflowStyle';
 
-import { Handles } from './types';
+export const Modal = forwardRef(
+  ({ children }: PropsWithChildren, ref: Ref<Handles>) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const { render } = usePortal();
+    const {
+      addListener,
+      removeListener,
+      ref: outClickRef,
+    } = useOutClick<HTMLElement>();
 
-const Modal = ({ children }: PropsWithChildren, ref: Ref<Handles>) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { render } = usePortal();
-  const {
-    addListener,
-    removeListener,
-    ref: contentRef,
-  } = useOutClick<HTMLElement>();
+    const handle = useCallback(() => {
+      setIsOpen(currentOpenValue => !currentOpenValue);
+    }, []);
 
-  const open = useCallback(() => {
-    setIsOpen(true);
-  }, []);
+    const open = useCallback(() => {
+      setTimeout(() => {
+        setIsOpen(true);
+      }, 0);
+    }, []);
 
-  const close = useCallback(() => {
-    setIsOpen(false);
-  }, []);
+    const close = useCallback(() => {
+      if (!isOpen) {
+        return;
+      }
 
-  const handle = useCallback(() => {
-    setIsOpen(currentOpenValue => !currentOpenValue);
-  }, []);
+      setIsOpen(false);
+    }, [isOpen]);
 
-  const handleOutClick = useCallback(() => {
-    if (!isOpen) {
-      return;
-    }
+    useEffect(() => {
+      addListener(close);
 
-    close();
-  }, [close, isOpen]);
+      return () => {
+        removeListener(close);
+      };
+    }, [close, addListener, removeListener]);
 
-  useEffect(() => {
-    addListener(handleOutClick);
+    useImperativeHandle(ref, () => ({
+      open,
+      close,
+      handle,
+    }));
 
-    return () => {
-      removeListener(handleOutClick);
-    };
-  }, [addListener, removeListener, handleOutClick]);
+    const Element = (
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <HiddenOverflowStyle />
 
-  useImperativeHandle(ref, () => ({
-    open,
-    close,
-    handle,
-  }));
-
-  const Element = (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          <HiddenOverflowStyle />
-
-          <motion.div
-            className={styles.container}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            initial={{
-              opacity: 0,
-              backgroundColor: 'rgba(0, 0, 0, 0)',
-            }}
-            animate={{
-              opacity: 1,
-              backgroundColor: 'rgba(0, 0, 0, 0.3)',
-            }}
-          >
-            <motion.section
-              ref={contentRef}
-              className={styles.content}
-              animate={{ scale: 1 }}
-              initial={{ scale: 0.5 }}
-              exit={{ scale: 0, opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 120, damping: 10 }}
+            <motion.div
+              className={styles.container}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              initial={{
+                opacity: 0,
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+              }}
+              animate={{
+                opacity: 1,
+                backgroundColor: 'rgba(0, 0, 0, 0.3)',
+              }}
             >
-              {children}
-            </motion.section>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
-  );
+              <motion.section
+                ref={outClickRef}
+                className={styles.content}
+                animate={{ scale: 1 }}
+                initial={{ scale: 0.5 }}
+                exit={{ scale: 0, opacity: 0 }}
+                transition={{ type: 'spring', stiffness: 120, damping: 10 }}
+              >
+                {children}
+              </motion.section>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    );
 
-  return render(Element, 'modals');
-};
+    return render(Element, 'modals');
+  },
+);
 
-export default forwardRef(Modal);
+Modal.displayName = 'Modal';

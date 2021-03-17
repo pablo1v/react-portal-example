@@ -1,17 +1,22 @@
+import { useOutClick } from '@hitechline/reactools';
 import { useEffect, useCallback } from 'react';
 
-import Divider from '../../ui/Divider';
+import styles from './styles.module.css';
 
-import useFade from '@fixtures/hooks/useFade';
-import useOutClick from '@fixtures/hooks/useOutClick';
+import { useFade } from '@resources/hooks/useFade';
+import { Divider } from '@screen/components/ui/Divider';
 
-import styles from './Header.module.css';
-
-const Header = () => {
+export const Header = (): JSX.Element => {
   const { props, hide, show, isShowing } = useFade();
   const { ref, addListener, removeListener } = useOutClick<HTMLDivElement>();
 
-  const handleOutClick = useCallback(() => {
+  const showDropdown = useCallback(() => {
+    setTimeout(() => {
+      show();
+    }, 0);
+  }, [show]);
+
+  const hideDropdown = useCallback(() => {
     if (!isShowing) {
       return;
     }
@@ -20,12 +25,12 @@ const Header = () => {
   }, [hide, isShowing]);
 
   useEffect(() => {
-    addListener(handleOutClick);
+    addListener(hideDropdown);
 
     return () => {
-      removeListener(handleOutClick);
+      removeListener(hideDropdown);
     };
-  }, [addListener, removeListener, handleOutClick]);
+  }, [addListener, removeListener, hideDropdown]);
 
   return (
     <header className={styles.container}>
@@ -41,7 +46,7 @@ const Header = () => {
         </nav>
 
         <div className={styles['user-container']}>
-          <button type="button" onClick={() => show()}>
+          <button type="button" onClick={showDropdown}>
             <img
               src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Blank&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
               alt="Avatar"
@@ -52,7 +57,7 @@ const Header = () => {
             <div className={styles['user-dropdown']}>
               <h3>Usuário</h3>
 
-              <Divider />
+              <Divider background="#ffffff" />
 
               <div className={styles['user-dropdown-navigation']}>
                 <button type="button">Sair</button>
@@ -64,5 +69,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;

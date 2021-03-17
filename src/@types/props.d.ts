@@ -1,3 +1,3 @@
-interface PropsWithChildren<T extends Record<any, any> = {}> extends T {
+type PropsWithChildren<T extends AnyObject = {}> = GetRecord<T> & {
   children: React.ReactNode;
-}
+};

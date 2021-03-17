@@ -1,6 +1,6 @@
 import { Global, css } from '@emotion/react';
 
-const HiddenOverflowStyle = () => (
+export const HiddenOverflowStyle = (): JSX.Element => (
   <Global
     styles={css`
       body {
@@ -9,5 +9,3 @@ const HiddenOverflowStyle = () => (
     `}
   />
 );
-
-export default HiddenOverflowStyle;

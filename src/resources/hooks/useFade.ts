@@ -1,30 +1,13 @@
 import { useState, useCallback, CSSProperties, HTMLAttributes } from 'react';
 
-const styles = {
-  showing: {
-    opacity: 0,
-    transition: 'all 300ms',
-    transform: 'translateY(-15px)',
-  },
-  shown: {
-    opacity: 1,
-    transition: 'all 300ms',
-    transform: 'translateY(0)',
-  },
-  hiding: {
-    opacity: 0,
-    transition: 'all 300ms',
-    transform: 'translateY(-15px)',
-  },
-  hidden: {
-    opacity: 0,
-    display: 'none',
-    transition: 'all 300ms',
-    transform: 'translateY(-15px)',
-  },
-};
+export interface UseFadeManager {
+  isShowing: boolean;
+  props: HTMLAttributes<HTMLElement>;
+  hide(): void;
+  show(): void;
+}
 
-const useFade = (): Fade => {
+export function useFade(): UseFadeManager {
   const [isShowing, setIsShowing] = useState(false);
   const [style, setStyle] = useState<CSSProperties>(styles.hidden);
 
@@ -58,14 +41,28 @@ const useFade = (): Fade => {
       style,
     },
   };
-};
-
-interface Fade {
-  isShowing: boolean;
-  props: HTMLAttributes<HTMLElement>;
-
-  hide(): void;
-  show(): void;
 }
 
-export default useFade;
+const styles = {
+  showing: {
+    opacity: 0,
+    transition: 'all 300ms',
+    transform: 'translateY(-15px)',
+  },
+  shown: {
+    opacity: 1,
+    transition: 'all 300ms',
+    transform: 'translateY(0)',
+  },
+  hiding: {
+    opacity: 0,
+    transition: 'all 300ms',
+    transform: 'translateY(-15px)',
+  },
+  hidden: {
+    opacity: 0,
+    display: 'none',
+    transition: 'all 300ms',
+    transform: 'translateY(-15px)',
+  },
+};

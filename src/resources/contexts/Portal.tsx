@@ -9,11 +9,18 @@ import {
 import { createPortal } from 'react-dom';
 
 const elements = ['menus', 'modals'] as const;
-const defaultPortalContextHandles = {} as Handles;
+const defaultPortalContextHandles = {} as ContextData;
 
-export const Context = createContext<Handles>(defaultPortalContextHandles);
+export interface ContextData {
+  render(node: ReactNode, elementId: typeof elements[number]): ReactPortal;
+  getElement(
+    elementId: typeof elements[number],
+  ): HTMLDivElement | null | undefined;
+}
 
-export const Provider = ({ children }: PropsWithChildren) => {
+export const Context = createContext<ContextData>(defaultPortalContextHandles);
+
+export const Provider = ({ children }: PropsWithChildren): JSX.Element => {
   const portalElements = useMemo(
     () =>
       elements.map(elementId => {
@@ -59,10 +66,3 @@ export const Provider = ({ children }: PropsWithChildren) => {
     </Context.Provider>
   );
 };
-
-interface Handles {
-  render(node: ReactNode, elementId: typeof elements[number]): ReactPortal;
-  getElement(
-    elementId: typeof elements[number],
-  ): HTMLDivElement | null | undefined;
-}

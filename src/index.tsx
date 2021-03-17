@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { StrictMode } from 'react';
+import { render } from 'react-dom';
 
-import { App } from '@container';
+import { reportWebVitals } from './reportWebVitals';
 
-import reportWebVitals from './reportWebVitals';
+import { App } from '@/container/App';
 
-ReactDOM.render(
-  <React.StrictMode>
+render(
+  <StrictMode>
     <App />
-  </React.StrictMode>,
-  document.querySelector('body > #root'),
+  </StrictMode>,
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function
