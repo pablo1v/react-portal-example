@@ -1,6 +1,7 @@
 {
   "name": "react-portal-example",
   "version": "0.0.0",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "react-app-rewired start",
