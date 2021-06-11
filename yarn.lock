@@ -1354,10 +1354,10 @@
   resolved "https://registry.yarnpkg.com/@hitechline/eslint-config/-/eslint-config-2.0.1.tgz#c624c3ba746156c287021ea0a9dd4572a3741041"
   integrity sha512-L2N0WVwKYthBWn8IFmtCzqIb4mTxTfSzOqf3issNDr+dK3o2q+qMeMpPReIKuQSPtukBblM9WYxnS+0YD1yTjA==
 
-"@hitechline/reactools@1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@hitechline/reactools/-/reactools-1.1.2.tgz#865dbb62a1c56002170cc1c1f228009fb3712370"
-  integrity sha512-w3H6M+QDE0cWHTD3h9WEOktGkFMCJfYnWOW8phTiNOGRu+Yi0tp4zvRlfaN1KOrzdi0YJB8cAr4Z65zkzaHFBQ==
+"@hitechline/reactools@1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@hitechline/reactools/-/reactools-1.1.3.tgz#e6e7a1aa15f79b880484613fe1428d7420d62642"
+  integrity sha512-CRvicLjrsnXJ+bqxdiqoKxFXg1uDtL6U/O1Q1dXWrcQUkw+u4c3s8qY7PcO03UvfPHBMpby+jpgYQEjZxVqtgw==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
